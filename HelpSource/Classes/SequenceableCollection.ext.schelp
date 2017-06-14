@@ -1,0 +1,7 @@
+INSTANCEMETHODS::
+
+subsection:: Extensions by PercSymbol
+
+method:: gmPerc
+
+returns:: takes a list of symbols and returns returns associated MIDI notes according to General MIDI Level 2.

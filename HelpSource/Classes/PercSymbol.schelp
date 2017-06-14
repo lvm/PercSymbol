@@ -1,0 +1,57 @@
+class:: PercSymbol
+summary:: A class that returns associated MIDI notes according to General MIDI Level 2.
+related:: Classes/Symbol, Classes/NoteSymbol, Classes/ChordSymbol
+categories:: External Control>MIDI
+
+description::
+
+Takes an "instrument name" (asSymbol or String) and returns the related MIDI note. It also accepts Lists or Arrays.
+Probably you won't need to use this class directly because there's also provided a method to be used with link::Classes/Symbol:: and link::Classes/SequenceableCollection::.  
+
+
+Examples::
+
+code::
+(
+x = Pseq(['bd', \sn, \ch].gmPerc, inf).asStream;
+10.do{ x.next.postln };
+)
+::
+
+code::
+PercSymbol(\sn);
+-> 38
+
+PercSymbol([\sn, \bd, \r]);
+-> [ 38, 36, rest ]
+
+PercSymbol([\sn, \bd, [\r, \sn, \ch]]);
+-> [ 38, 36, [ rest, 38, 42 ] ]
+::
+
+code::
+[\bd, \sn, \oh, \bd].gmPerc;
+::
+
+Pseq used with Pdef - Pbind:
+code::
+(
+s.boot;
+MIDIClient.init;
+~midiOut = MIDIOut.newByName("Midi Through", "Midi Through Port-0");
+)
+
+(
+Pdef(\beat,
+  Pbind(
+    \type, \midi,
+    \midiout, ~midiOut,
+    \chan, 9,
+    \tempo, 120/60,
+    \midinote, Pseq([\bd, \sn, \oh, \bd].gmPerc,inf),
+    \dur, Pseq([1/2, 1/4, 3/4, 1/2], inf),
+    \amp, 0.9,
+  ),
+).play(quant:4);
+)
+::
