@@ -43,6 +43,7 @@ PercSymbol([\sn, \bd, [\r, \sn, \ch]]);
 
 ```
 ['bd', \sn, \ch, \rest].gmPerc
+-> [ 36, 38, 42, rest ]
 ```
 
 ## Reference
