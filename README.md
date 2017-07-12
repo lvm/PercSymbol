@@ -17,9 +17,7 @@ The path can be found by evaluating `Platform.userExtensionDir` or `Platform.sys
 x = Pseq(['bd', \sn, \ch].gmPerc, inf).asStream;
 10.do{ x.next.postln };
 )
-```
-
-```36
+36
 38
 42
 36
@@ -41,6 +39,11 @@ PercSymbol([\sn, \bd, \r]);
 
 PercSymbol([\sn, \bd, [\r, \sn, \ch]]);
 -> [ 38, 36, [ rest, 38, 42 ] ]
+```
+
+```
+['bd', \sn, \ch, \rest].gmPerc
+-> [ 36, 38, 42, rest ]
 ```
 
 ## Reference
