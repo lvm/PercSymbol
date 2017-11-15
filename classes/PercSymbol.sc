@@ -24,6 +24,7 @@ PercSymbol {
 
   *initClass {
     midiNotes = (
+      \r: \rest,
       \hq: 27, // high q
       \sl: 28, // slap
       \scr: 29, // scratch
