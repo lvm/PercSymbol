@@ -63,6 +63,7 @@ PercSymbol {
       \ri2: 59, // ride cymbal 2
       \hb: 60, // hi bongo
       \lb: 61, // low bongo
+      \hc: 62, // hi conga
       \mhc: 62, // mute hi conga
       \ohc: 63, // open hi conga
       \lc: 64, // low conga
@@ -125,6 +126,18 @@ PercSymbol {
 
 }
 
+
++ Symbol {
+  asGMPerc {
+    ^PercSymbol.asMidiNote(this);
+  }
+}
+
++ String {
+  asGMPerc {
+    ^PercSymbol.asMidiNote(this);
+  }
+}
 
 + SequenceableCollection {
 
