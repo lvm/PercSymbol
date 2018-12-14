@@ -5,53 +5,38 @@ categories:: External Control>MIDI
 
 description::
 
-Takes an "instrument name" (asSymbol or String) and returns the related MIDI note. It also accepts Lists or Arrays.
-Probably you won't need to use this class directly because there's also provided a method to be used with link::Classes/Symbol:: and link::Classes/SequenceableCollection::.  
-
+Takes an "instrument name" (link::Classes/Symbol::) and returns the related MIDI note. It also accepts Collections.
 
 Examples::
 
 code::
-(
-x = Pseq(['bd', \sn, \ch].gmPerc, inf).asStream;
-10.do{ x.next.postln };
-)
-::
+Pseq(['bd', \sn, \ch], inf).asStream.nextN(10);
+-> [ 36, 38, 42, 36, 38, 42, 36, 38, 42, 36 ]
 
-code::
 PercSymbol(\sn);
 -> 38
 
+PercSymbol.oh;
+-> 46
+
 PercSymbol([\sn, \bd, \r]);
--> [ 38, 36, rest ]
+-> [ 38, 36, Rest(1) ]
 
 PercSymbol([\sn, \bd, [\r, \sn, \ch]]);
--> [ 38, 36, [ rest, 38, 42 ] ]
-::
+-> [ 38, 36, [ Rest(1), 38, 42 ] ]
 
-code::
-[\bd, \sn, \oh, \bd].gmPerc;
-::
+['bd', \sn, \ch, \rest].asPercSymbol;
+-> [ 36, 38, 42, Rest(1) ]
 
-Pseq used with Pdef - Pbind:
-code::
-(
-s.boot;
-MIDIClient.init;
-~midiOut = MIDIOut.newByName("Midi Through", "Midi Through Port-0");
-)
+PercSymbol.names;
+-> [ abd, ag, bd, be, bt, ca, cas, ch, cl, cow, cp, cr, cr2, cy, esn, gui, hag, hb, hc, hft, hh, hmt, hq, ht, hti, hwb, jb, lag, lb, lc, lft, lgui, lmt, lt, lti, lwb, lwi, ma, mb, mc, mcl, mhc, ms, mt, oc, oh, ohc, os, ot, ph, ri, ri2, rm, scr, scy, sgui, sha, sl, sn, spl, sps, sqc, st, sti, swi, ta, vib, whi ]
 
-(
-Pdef(\beat,
-  Pbind(
-    \type, \midi,
-    \midiout, ~midiOut,
-    \chan, 9,
-    \tempo, 120/60,
-    \midinote, Pseq([\bd, \sn, \oh, \bd].gmPerc,inf),
-    \dur, Pseq([1/2, 1/4, 3/4, 1/2], inf),
-    \amp, 0.9,
-  ),
-).play(quant:4);
-)
+PercSymbol.directory;
+-> abd: MIDI Note 35
+ag: MIDI Note 68
+bd: MIDI Note 36
+be: MIDI Note 53
+bt: MIDI Note 84
+ca: MIDI Note 69
+...
 ::

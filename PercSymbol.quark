@@ -2,6 +2,6 @@
 \name: "PercSymbol",
 \summary: "A class that returns associated MIDI notes according to General MIDI Level 2.",
 \author: "Mauro Lizaur",
-\version: 0.1,
+\version: 0.23,
 \organization: "buenos aires live code",
 )
