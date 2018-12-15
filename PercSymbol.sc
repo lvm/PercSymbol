@@ -141,4 +141,5 @@ PercSymbol {
 
 + Collection {
   asPercSymbol { ^PercSymbol(this); }
+  embedInStream { ^this.asPercSymbol.yield; }
 }
